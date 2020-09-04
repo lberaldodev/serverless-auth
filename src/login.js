@@ -5,11 +5,11 @@ const JWT_KEY = process.env.JWT_KEY
 const login = async (event) => {
     console.log("LOGIN INVOKED", event.body);
 
-    const { username, password } = JSON.parse(event);
+    const { username, password } = JSON.parse(event.body);
 
     const validUser = users.find(user => user.username.toLocaleLowerCase() == username.toLocaleLowerCase() && user.password == password);
 
-    if (validUser) {
+    if (!validUser) {
         return {
             statusCode: 401,
             body: JSON.stringify({
