@@ -1,0 +1,36 @@
+
+service: sls-auth
+
+frameworkVersion: '1'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+plugins:
+  - serverless-offline
+
+functions:
+  login:
+    handler: src/login.handler
+    events:
+      - http:
+        path: login
+        method: post
+        cors: true
+        
+  heroes-public:
+    handler: src/getHeroes.public
+    events:
+      - http:
+          path: public
+          method: get
+          cors: true
+
+  heroes-private:
+    handler: src/getHeroes.private
+    events:
+      - http:
+          path: private
+          method: get
+          cors: true
