@@ -13,6 +13,8 @@ plugins:
   - serverless-offline
 
 functions:
+  authorizerFunc:
+    handler: src/authorizer.handler
   login:
     handler: src/login.handler
     events:
@@ -36,3 +38,4 @@ functions:
           path: private
           method: get
           cors: true
+          authorizer: authorizerFunc
